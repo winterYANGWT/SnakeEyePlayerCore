@@ -1,0 +1,8 @@
+#ifndef OSFF_THREAD_MANAGER_HPP
+#define OSFF_THREAD_MANAGER_HPP
+
+class OSFFThreadManager
+{
+};
+
+#endif // OSFF_THREAD_MANAGER_HPP

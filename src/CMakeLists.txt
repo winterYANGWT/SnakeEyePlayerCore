@@ -1,0 +1,7 @@
+add_subdirectory(avcore)
+add_subdirectory(element)
+add_subdirectory(manager)
+add_subdirectory(parser)
+add_subdirectory(queue)
+add_subdirectory(thread)
+add_subdirectory(util)
