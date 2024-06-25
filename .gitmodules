@@ -1,3 +1,6 @@
 [submodule "thirdparty/json"]
 	path = thirdparty/json
 	url = git@github.com:nlohmann/json.git
+[submodule "thirdparty/SQLiteCPP"]
+	path = thirdparty/SQLiteCPP
+	url = git@github.com:SRombauts/SQLiteCpp.git
