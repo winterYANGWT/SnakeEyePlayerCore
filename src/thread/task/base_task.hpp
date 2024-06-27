@@ -1,19 +1,22 @@
-#ifndef OSFF_BASE_TASK_HPP
-#define OSFF_BASE_TASK_HPP
+#ifndef SNAKE_EYE_BASE_TASK_HPP
+#define SNAKE_EYE_BASE_TASK_HPP
 
-#include "../../util/osff_macro.h"
+#include "../../static/marco.hpp"
 #include "../../util/util.h"
 
-class OSFFBaseTask
+namespace SnakeEye
 {
-public:
-    bool exit_flag = false;
+    class SnakeEyeBaseTask
+    {
+    public:
+        bool exit_flag = false;
 
-    int status = 0;
+        int status = 0;
 
-    virtual ~OSFFBaseTask() {}
+        virtual ~SnakeEyeBaseTask() {}
 
-    virtual int run() = 0;
-};
+        virtual int run() = 0;
+    };
+}
 
-#endif // OSFF_BASE_TASK_HPP
+#endif // SNAKE_EYE_BASE_TASK_HPP

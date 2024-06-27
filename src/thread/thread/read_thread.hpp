@@ -1,27 +1,30 @@
-#ifndef OSFF_READ_THREAD_HPP
-#define OSFF_READ_THREAD_HPP
+#ifndef SNAKE_EYE_READ_THREAD_HPP
+#define SNAKE_EYE_READ_THREAD_HPP
 
 #include "base_thread.hpp"
 #include "../task/read_task.hpp"
 
-class OSFFReadThread : public OSFFBaseThread
+namespace SnakeEye
 {
-private:
-    OSFFFormatContext *osff_fmt_ctx = nullptr;
-
-    std::function<int(int, void *, int)> push_pkt_cb;
-
-private:
-    OSFFReadTask *get_task()
+    class SnakeEyeReadThread : public SnakeEyeBaseThread
     {
-        return new OSFFReadTask(this->osff_fmt_ctx, this->push_pkt_cb);
-    }
+    private:
+        SnakeEyeFormatContext *se_fmt_ctx = nullptr;
 
-public:
-    OSFFReadThread(OSFFFormatContext *osff_fmt_ctx,
-                   std::function<int(int, void *, int)> push_pkt_cb)
-        : osff_fmt_ctx(osff_fmt_ctx),
-          push_pkt_cb(push_pkt_cb) {}
-};
+        std::function<int(int, void *, int)> push_pkt_cb;
 
-#endif // OSFF_READ_THREAD_HPP
+    private:
+        SnakeEyeReadTask *get_task()
+        {
+            return new SnakeEyeReadTask(this->se_fmt_ctx, this->push_pkt_cb);
+        }
+
+    public:
+        SnakeEyeReadThread(SnakeEyeFormatContext *se_fmt_ctx,
+                           std::function<int(int, void *, int)> push_pkt_cb)
+            : se_fmt_ctx(se_fmt_ctx),
+              push_pkt_cb(push_pkt_cb) {}
+    };
+}
+
+#endif // SNAKE_EYE_READ_THREAD_HPP

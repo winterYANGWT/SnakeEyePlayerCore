@@ -1,5 +1,5 @@
-#ifndef OSFF_READ_TASK_HPP
-#define OSFF_READ_TASK_HPP
+#ifndef SNAKE_EYE_READ_TASK_HPP
+#define SNAKE_EYE_READ_TASK_HPP
 
 #include <functional>
 
@@ -7,20 +7,23 @@
 #include "../../context/format_context.hpp"
 #include "../../util/util.h"
 
-class OSFFReadTask : public OSFFBaseTask
+namespace SnakeEye
 {
-private:
-    OSFFFormatContext *osff_fmt_ctx = nullptr;
+    class SnakeEyeReadTask : public SnakeEyeBaseTask
+    {
+    private:
+        SnakeEyeFormatContext *se_fmt_ctx = nullptr;
 
-    std::function<int(int, void *, int)> push_pkt_cb;
+        std::function<int(int, void *, int)> push_pkt_cb;
 
-public:
-    OSFFReadTask(OSFFFormatContext *osff_fmt_ctx,
-                 std::function<int(int, void *, int)> push_pkt_cb)
-        : osff_fmt_ctx(osff_fmt_ctx),
-          push_pkt_cb(push_pkt_cb) {}
+    public:
+        SnakeEyeReadTask(SnakeEyeFormatContext *se_fmt_ctx,
+                         std::function<int(int, void *, int)> push_pkt_cb)
+            : se_fmt_ctx(se_fmt_ctx),
+              push_pkt_cb(push_pkt_cb) {}
 
-    virtual int run();
-};
+        virtual int run();
+    };
+}
 
-#endif // OSFF_READ_TASK_HPP
+#endif // SNAKE_EYE_READ_TASK_HPP

@@ -1,31 +1,34 @@
-#ifndef OSFF_WRITE_TASK_HPP
-#define OSFF_WRITE_TASK_HPP
+#ifndef SNAKE_EYE_WRITE_TASK_HPP
+#define SNAKE_EYE_WRITE_TASK_HPP
 
 #include "base_task.hpp"
 #include "../../context/format_context.hpp"
 
-class OSFFWriteTask : public OSFFBaseTask
+namespace SnakeEye
 {
-private:
-    OSFFFormatContext *osff_fmt_ctx = nullptr;
+    class SnakeEyeWriteTask : public SnakeEyeBaseTask
+    {
+    private:
+        SnakeEyeFormatContext *se_fmt_ctx = nullptr;
 
-    std::function<int(int, void *&, int)> pop_pkt_cb;
+        std::function<int(int, void *&, int)> pop_pkt_cb;
 
-    bool is_write_header = false;
+        bool is_write_header = false;
 
-    int num_nullptr = 0;
+        int num_nullptr = 0;
 
-public:
-    OSFFWriteTask(OSFFFormatContext *osff_fmt_ctx,
-                  std::function<int(int, void *&, int)> pop_pkt_cb)
-        : osff_fmt_ctx(osff_fmt_ctx),
-          pop_pkt_cb(pop_pkt_cb) {}
+    public:
+        SnakeEyeWriteTask(SnakeEyeFormatContext *se_fmt_ctx,
+                          std::function<int(int, void *&, int)> pop_pkt_cb)
+            : se_fmt_ctx(se_fmt_ctx),
+              pop_pkt_cb(pop_pkt_cb) {}
 
-    virtual int run();
+        virtual int run();
 
-    int write_header();
+        int write_header();
 
-    int write_tailer();
-};
+        int write_tailer();
+    };
+}
 
-#endif // OSFF_WRITE_TASK_HPP
+#endif // SNAKE_EYE_WRITE_TASK_HPP

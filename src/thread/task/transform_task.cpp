@@ -1,18 +1,18 @@
 #include "transform_task.hpp"
 
-int OSFFTransformerTask::run()
+int SnakeEye::SnakeEyeTransformerTask::run()
 {
     AVFrame *dec_frm = nullptr;
     AVFrame *enc_frm = nullptr;
 
-    if ((this->status = this->pop_frm_cb(this->osff_trfm_ctx->dstrm_idx,
+    if ((this->status = this->pop_frm_cb(this->se_trfm_ctx->dstrm_idx,
                                          (void *&)dec_frm,
                                          THREAD_NO_TIMEOUT)) < 0)
     {
         av_log(nullptr, AV_LOG_ERROR,
                "Could not pop frame (error: '%s') for transform thread (decode stream index #%d)\n",
                err2str(this->status).c_str(),
-               this->osff_trfm_ctx->dstrm_idx);
+               this->se_trfm_ctx->dstrm_idx);
         this->exit_flag = true;
         return this->status;
     }
@@ -22,12 +22,12 @@ int OSFFTransformerTask::run()
         this->exit_flag = true;
     }
 
-    for (auto it = this->osff_trfm_ctx->trfms.begin();
-         it != this->osff_trfm_ctx->trfms.end();
+    for (auto it = this->se_trfm_ctx->trfms.begin();
+         it != this->se_trfm_ctx->trfms.end();
          ++it)
     {
         int estrm_idx = it->first;
-        OSFFTransformer *trfm = it->second;
+        SnakeEyeTransformer *trfm = it->second;
 
         // send the frame to transformer
         if ((this->status = trfm->send_frame(dec_frm)) < 0)
@@ -60,7 +60,7 @@ int OSFFTransformerTask::run()
                     av_log(nullptr, AV_LOG_ERROR,
                            "Could not push frame (error: '%s') for transform thread (decode stream index #%d, encode stream index #%d)\n",
                            err2str(this->status).c_str(),
-                           this->osff_trfm_ctx->dstrm_idx,
+                           this->se_trfm_ctx->dstrm_idx,
                            estrm_idx);
                     av_frame_free(&enc_frm);
                     this->exit_flag = true;

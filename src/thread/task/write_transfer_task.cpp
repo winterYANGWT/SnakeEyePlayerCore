@@ -1,14 +1,14 @@
 #include "write_transfer_task.hpp"
 
-int OSFFTransferTask::run()
+int SnakeEye::SnakeEyeTransferTask::run()
 {
     auto it = this->estrm_id_list.begin();
 
     while (it != this->estrm_id_list.end())
     {
         int estrm_id = *it;
-        int ostrm_id = this->osff_pkt_trans_ctx->strm2fmt_way[estrm_id];
-        int estrm_queue_id = this->osff_pkt_trans_ctx->strm2fmt_queues_id[estrm_id];
+        int ostrm_id = this->se_pkt_trans_ctx->strm2fmt_way[estrm_id];
+        int estrm_queue_id = this->se_pkt_trans_ctx->strm2fmt_queues_id[estrm_id];
 
         // try to pop packet from stream packet queue
         AVPacket *pkt = nullptr;
@@ -39,7 +39,7 @@ int OSFFTransferTask::run()
         }
 
         // push packet to format packet queue
-        if ((this->status = this->push_pkt_cb(this->osff_pkt_trans_ctx->fmt_id,
+        if ((this->status = this->push_pkt_cb(this->se_pkt_trans_ctx->fmt_id,
                                               pkt,
                                               THREAD_NO_TIMEOUT)) < 0)
         {

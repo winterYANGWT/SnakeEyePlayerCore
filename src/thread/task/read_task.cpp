@@ -1,6 +1,6 @@
 #include "read_task.hpp"
 
-int OSFFReadTask::run()
+int SnakeEye::SnakeEyeReadTask::run()
 {
     // allocate a packet
     AVPacket *pkt = nullptr;
@@ -12,7 +12,7 @@ int OSFFReadTask::run()
     }
 
     // read a packet from format context
-    if (this->status = av_read_frame(this->osff_fmt_ctx->fmt_ctx,
+    if (this->status = av_read_frame(this->se_fmt_ctx->fmt_ctx,
                                      pkt) < 0)
     {
         // error occurs, free the packet
@@ -23,9 +23,9 @@ int OSFFReadTask::run()
         // otherwise, set exit flag to true and return
         if (this->status == AVERROR_EOF)
         {
-            av_log(this->osff_fmt_ctx->fmt_ctx, AV_LOG_INFO,
+            av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_INFO,
                    "Reached the end of file for format #%d\n",
-                   this->osff_fmt_ctx->fmt_id);
+                   this->se_fmt_ctx->fmt_id);
             this->exit_flag = true;
             this->status = 0;
         }
@@ -36,17 +36,17 @@ int OSFFReadTask::run()
         }
         else
         {
-            av_log(this->osff_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
+            av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
                    "Could not read frame (error: '%s') for format #%d\n",
                    err2str(this->status).c_str(),
-                   this->osff_fmt_ctx->fmt_id);
+                   this->se_fmt_ctx->fmt_id);
             this->exit_flag = true;
             return this->status;
         }
     }
 
     // use callback function to push a packet to queue
-    if (this->status = this->push_pkt_cb(this->osff_fmt_ctx->fmt_pkt_queue_id,
+    if (this->status = this->push_pkt_cb(this->se_fmt_ctx->fmt_pkt_queue_id,
                                          pkt,
                                          THREAD_NO_TIMEOUT) < 0)
     {
@@ -54,7 +54,7 @@ int OSFFReadTask::run()
         av_log(nullptr, AV_LOG_ERROR,
                "Could not push packet (error: '%s') for format_packet_queue #%d\n",
                err2str(this->status).c_str(),
-               this->osff_fmt_ctx->fmt_pkt_queue_id);
+               this->se_fmt_ctx->fmt_pkt_queue_id);
         this->exit_flag = true;
     }
 

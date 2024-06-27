@@ -1,27 +1,30 @@
-#ifndef OSFF_TRANSFORMER_TASK_HPP
-#define OSFF_TRANSFORMER_TASK_HPP
+#ifndef SNAKE_EYE_TRANSFORMER_TASK_HPP
+#define SNAKE_EYE_TRANSFORMER_TASK_HPP
 
 #include "base_task.hpp"
 #include "../../context/transformer_context.hpp"
 
-class OSFFTransformerTask : public OSFFBaseTask
+namespace SnakeEye
 {
-private:
-    OSFFTransformerContext *osff_trfm_ctx = nullptr;
+    class SnakeEyeTransformerTask : public SnakeEyeBaseTask
+    {
+    private:
+        SnakeEyeTransformerContext *se_trfm_ctx = nullptr;
 
-    std::function<int(int, void *&, int)> pop_frm_cb;
+        std::function<int(int, void *&, int)> pop_frm_cb;
 
-    std::function<int(int, void *, int)> push_frm_cb;
+        std::function<int(int, void *, int)> push_frm_cb;
 
-public:
-    OSFFTransformerTask(OSFFTransformerContext *osff_trfm_ctx,
-                        std::function<int(int, void *&, int)> pop_frm_cb,
-                        std::function<int(int, void *, int)> push_frm_cb)
-        : osff_trfm_ctx(osff_trfm_ctx),
-          pop_frm_cb(pop_frm_cb),
-          push_frm_cb(push_frm_cb) {}
+    public:
+        SnakeEyeTransformerTask(SnakeEyeTransformerContext *se_trfm_ctx,
+                                std::function<int(int, void *&, int)> pop_frm_cb,
+                                std::function<int(int, void *, int)> push_frm_cb)
+            : se_trfm_ctx(se_trfm_ctx),
+              pop_frm_cb(pop_frm_cb),
+              push_frm_cb(push_frm_cb) {}
 
-    virtual int run();
-};
+        virtual int run();
+    };
+}
 
-#endif // OSFF_TRANSFORMER_TASK_HPP
+#endif // SNAKE_EYE_TRANSFORMER_TASK_HPP
