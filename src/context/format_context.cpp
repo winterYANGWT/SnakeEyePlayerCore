@@ -1,7 +1,7 @@
 #include "format_context.hpp"
 
-int OSFFFormatContext::add_stream(AVCodecContext *codec_ctx,
-                                  int &ostrm_id)
+int SnakeEye::SnakeEyeFormatContext::add_stream(AVCodecContext *codec_ctx,
+                                                int &ostrm_id)
 {
     // add a new stream to the output format context
     int error = 0;

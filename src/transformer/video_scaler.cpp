@@ -1,14 +1,14 @@
 #include "video_scaler.hpp"
 
-OSFFVideoScaler::OSFFVideoScaler(int dstrm_idx,
-                                 int estrm_idx,
-                                 const AVCodecContext *dec_ctx,
-                                 const AVCodecContext *enc_ctx)
-    : OSFFTransformer(AVMEDIA_TYPE_VIDEO,
-                      dstrm_idx,
-                      estrm_idx,
-                      dec_ctx,
-                      enc_ctx)
+SnakeEye::SnakeEyeVideoScaler::SnakeEyeVideoScaler(int dstrm_idx,
+                                                   int estrm_idx,
+                                                   const AVCodecContext *dec_ctx,
+                                                   const AVCodecContext *enc_ctx)
+    : SnakeEyeTransformer(AVMEDIA_TYPE_VIDEO,
+                          dstrm_idx,
+                          estrm_idx,
+                          dec_ctx,
+                          enc_ctx)
 {
     int error = 0;
     int dec_width = dec_ctx->width;
@@ -36,7 +36,7 @@ OSFFVideoScaler::OSFFVideoScaler(int dstrm_idx,
     }
 }
 
-int OSFFVideoScaler::send_frame(AVFrame *dec_frm)
+int SnakeEye::SnakeEyeVideoScaler::send_frame(AVFrame *dec_frm)
 {
     int error = 0;
 

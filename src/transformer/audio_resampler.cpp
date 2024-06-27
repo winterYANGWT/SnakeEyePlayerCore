@@ -1,14 +1,14 @@
 #include "audio_resampler.hpp"
 
-OSFFAudioResampler::OSFFAudioResampler(int dstrm_idx,
-                                       int estrm_idx,
-                                       const AVCodecContext *dec_ctx,
-                                       const AVCodecContext *enc_ctx)
-    : OSFFTransformer(AVMEDIA_TYPE_AUDIO,
-                      dstrm_idx,
-                      estrm_idx,
-                      dec_ctx,
-                      enc_ctx)
+SnakeEye::SnakeEyeAudioResampler::SnakeEyeAudioResampler(int dstrm_idx,
+                                                         int estrm_idx,
+                                                         const AVCodecContext *dec_ctx,
+                                                         const AVCodecContext *enc_ctx)
+    : SnakeEyeTransformer(AVMEDIA_TYPE_AUDIO,
+                          dstrm_idx,
+                          estrm_idx,
+                          dec_ctx,
+                          enc_ctx)
 {
     int error = 0;
     AVChannelLayout play_ch_layout;
@@ -19,7 +19,6 @@ OSFFAudioResampler::OSFFAudioResampler(int dstrm_idx,
     const AVChannelLayout *enc_ch_layout = enc_ctx == nullptr ? &play_ch_layout : &(enc_ctx->ch_layout);
     AVSampleFormat enc_smp_fmt = enc_ctx == nullptr ? AV_SAMPLE_FMT_S16 : enc_ctx->sample_fmt;
     int enc_smp_rate = enc_ctx == nullptr ? dec_smp_rate : enc_ctx->sample_rate;
-
     this->dst_sample_rate = enc_ctx->sample_rate;
 
     // set options and allocate swr context
@@ -56,7 +55,7 @@ OSFFAudioResampler::OSFFAudioResampler(int dstrm_idx,
            this->strm_map_info.c_str());
 }
 
-int OSFFAudioResampler::send_frame(AVFrame *dec_frm)
+int SnakeEye::SnakeEyeAudioResampler::send_frame(AVFrame *dec_frm)
 {
     int error = 0;
 

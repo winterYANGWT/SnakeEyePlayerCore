@@ -1,5 +1,5 @@
-#ifndef OSFF_VIDEO_SCALER_HPP
-#define OSFF_VIDEO_SCALER_HPP
+#ifndef SNAKE_EYE_VIDEO_SCALER_HPP
+#define SNAKE_EYE_VIDEO_SCALER_HPP
 
 extern "C"
 {
@@ -8,26 +8,26 @@ extern "C"
 
 #include "transformer.hpp"
 
-class OSFFVideoScaler : public OSFFTransformer
+namespace SnakeEye
 {
-private:
-    SwsContext *sws_ctx = nullptr;
-
-public:
-    OSFFVideoScaler(int dstrm_idx,
-                    int estrm_idx,
-                    const AVCodecContext *dec_ctx,
-                    const AVCodecContext *enc_ctx);
-
-    ~OSFFVideoScaler()
+    class SnakeEyeVideoScaler : public SnakeEyeTransformer
     {
-        sws_freeContext(this->sws_ctx);
+    private:
+        SwsContext *sws_ctx = nullptr;
+
+    public:
+        SnakeEyeVideoScaler(int dstrm_idx,
+                            int estrm_idx,
+                            const AVCodecContext *dec_ctx,
+                            const AVCodecContext *enc_ctx);
+
+        ~SnakeEyeVideoScaler()
+        {
+            sws_freeContext(this->sws_ctx);
+        };
+
+        virtual int send_frame(AVFrame *dec_frm);
     };
+}
 
-    // virtual int transform(AVFrame *dec_frm,
-    //                       AVFrame **enc_frm);
-
-    virtual int send_frame(AVFrame *dec_frm);
-};
-
-#endif // OSFF_VIDEO_SCALER_HPP
+#endif // SNAKE_EYE_VIDEO_SCALER_HPP

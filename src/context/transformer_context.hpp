@@ -1,16 +1,19 @@
-#ifndef OSFF_TRANSFORMER_CONTEXT_HPP
-#define OSFF_TRANSFORMER_CONTEXT_HPP
+#ifndef SNAKE_EYE_TRANSFORMER_CONTEXT_HPP
+#define SNAKE_EYE_TRANSFORMER_CONTEXT_HPP
 
 #include <unordered_map>
 
 #include "../transformer/transformer.hpp"
 
-class OSFFTransformerContext
+namespace SnakeEye
 {
-public:
-    int dstrm_idx = -1;
+    class SnakeEyeTransformerContext
+    {
+    public:
+        int dstrm_idx = -1;
 
-    std::unordered_map<int, OSFFTransformer *> trfms;
-};
+        std::unordered_map<int, SnakeEyeTransformer *> trfms;
+    };
+}
 
-#endif // OSFF_TRANSFORMER_CONTEXT_HPP
+#endif // SNAKE_EYE_TRANSFORMER_CONTEXT_HPP
