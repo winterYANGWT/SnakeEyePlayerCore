@@ -1,7 +1,7 @@
-#include "format_info.h"
+#include "format_info.hpp"
 
-int OSFFFormatInfo::parse(int fmt_idx,
-                          AVFormatContext *fmt_ctx)
+int SnakeEye::SnakeEyeFormatInfo::parse(int fmt_idx,
+                                        AVFormatContext *fmt_ctx)
 {
     this->fmt_idx = fmt_idx;
     this->url = fmt_ctx->url;
@@ -27,7 +27,7 @@ int OSFFFormatInfo::parse(int fmt_idx,
     }
 }
 
-int OSFFFormatInfo::parse(nlohmann::json &info)
+int SnakeEye::SnakeEyeFormatInfo::parse(nlohmann::json &info)
 {
     this->fmt_idx = info["format_index"];
     this->io_type = info["io_type"];
@@ -47,7 +47,7 @@ int OSFFFormatInfo::parse(nlohmann::json &info)
     this->num_streams = this->strm_idxs.size();
 }
 
-int OSFFFormatInfo::to_json(nlohmann::json &info)
+int SnakeEye::SnakeEyeFormatInfo::to_json(nlohmann::json &info)
 {
     info.clear();
     info["format_index"] = this->fmt_idx;

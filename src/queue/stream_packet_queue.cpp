@@ -1,6 +1,6 @@
 #include "stream_packet_queue.hpp"
 
-int OSFFStreamPacketQueue::reset_time(AVPacket *pkt)
+int SnakeEye::SnakeEyeStreamPacketQueue::reset_time(AVPacket *pkt)
 {
     // do nothing if packet is nullptr
     if (pkt == nullptr)

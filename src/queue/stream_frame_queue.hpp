@@ -1,5 +1,5 @@
-#ifndef OSFF_STREAM_FRAME_QUEUE_HPP
-#define OSFF_STREAM_FRAME_QUEUE_HPP
+#ifndef SNAKE_EYE_STREAM_FRAME_QUEUE_HPP
+#define SNAKE_EYE_STREAM_FRAME_QUEUE_HPP
 
 extern "C"
 {
@@ -8,50 +8,53 @@ extern "C"
 
 #include "data_queue.hpp"
 
-class OSFFStreamFrameQueue : public OSFFDataQueue
+namespace SnakeEye
 {
-private:
-    AVRational base_tb = {1, AV_TIME_BASE};
-
-    AVRational prev_tb = {1, AV_TIME_BASE};
-
-    AVRational cur_tb = {1, AV_TIME_BASE};
-
-private:
-    int reset_time(AVFrame *frm);
-
-public:
-    const static std::string type;
-
-public:
-    OSFFStreamFrameQueue(AVRational &prev_tb,
-                         AVRational &cur_tb,
-                         int max_size = -1)
-        : prev_tb(prev_tb),
-          cur_tb(cur_tb),
-          OSFFDataQueue(max_size) {}
-
-    virtual int preprocess(void *data)
+    class SnakeEyeStreamFrameQueue : public SnakeEyeDataQueue
     {
-        if (data != nullptr)
+    private:
+        AVRational base_tb = {1, AV_TIME_BASE};
+
+        AVRational prev_tb = {1, AV_TIME_BASE};
+
+        AVRational cur_tb = {1, AV_TIME_BASE};
+
+    private:
+        int reset_time(AVFrame *frm);
+
+    public:
+        const static std::string type;
+
+    public:
+        SnakeEyeStreamFrameQueue(AVRational &prev_tb,
+                                 AVRational &cur_tb,
+                                 int max_size = -1)
+            : prev_tb(prev_tb),
+              cur_tb(cur_tb),
+              SnakeEyeDataQueue(max_size) {}
+
+        virtual int preprocess(void *data)
         {
-            this->reset_time((AVFrame *)data);
+            if (data != nullptr)
+            {
+                this->reset_time((AVFrame *)data);
+            }
+
+            return 0;
         }
 
-        return 0;
-    }
-
-    virtual int destroy_data(void *data)
-    {
-        if (data != nullptr)
+        virtual int destroy_data(void *data)
         {
-            av_frame_free((AVFrame **)&data);
+            if (data != nullptr)
+            {
+                av_frame_free((AVFrame **)&data);
+            }
+
+            return 0;
         }
+    };
 
-        return 0;
-    }
-};
+    const std::string SnakeEyeStreamFrameQueue::type = "SnakeEyeStreamFrameQueue";
+}
 
-const std::string OSFFStreamFrameQueue::type = "OSFFStreamFrameQueue";
-
-#endif // OSFF_STREAM_FRAME_QUEUE_HPP
+#endif // SNAKE_EYE_STREAM_FRAME_QUEUE_HPP

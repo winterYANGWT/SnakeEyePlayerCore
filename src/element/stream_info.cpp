@@ -1,9 +1,9 @@
-#include "stream_info.h"
+#include "stream_info.hpp"
 
-OSFFStreamInfo::OSFFStreamInfo(int strm_idx,
-                               int fmt_idx,
-                               AVStream *strm,
-                               std::string code_type)
+SnakeEye::SnakeEyeStreamInfo::SnakeEyeStreamInfo(int strm_idx,
+                                                 int fmt_idx,
+                                                 AVStream *strm,
+                                                 std::string code_type)
 {
     this->strm_idx = strm_idx;
     this->fmt_idx = fmt_idx;
@@ -50,7 +50,7 @@ OSFFStreamInfo::OSFFStreamInfo(int strm_idx,
     }
 }
 
-OSFFStreamInfo::OSFFStreamInfo(nlohmann::json &info)
+SnakeEye::SnakeEyeStreamInfo::SnakeEyeStreamInfo(nlohmann::json &info)
 {
     this->strm_idx = info["stream_index"];
     this->fmt_idx = info["format_index"];
@@ -94,7 +94,7 @@ OSFFStreamInfo::OSFFStreamInfo(nlohmann::json &info)
     }
 }
 
-int OSFFStreamInfo::to_json(nlohmann::json &info)
+int SnakeEye::SnakeEyeStreamInfo::to_json(nlohmann::json &info)
 {
     info.clear();
     info["stream_index"] = this->strm_idx;

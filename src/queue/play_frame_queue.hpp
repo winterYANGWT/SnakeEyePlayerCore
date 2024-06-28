@@ -1,5 +1,5 @@
-#ifndef OSFF_PLAY_FRAME_QUEUE_HPP
-#define OSFF_PLAY_FRAME_QUEUE_HPP
+#ifndef SNAKE_EYE_PLAY_FRAME_QUEUE_HPP
+#define SNAKE_EYE_PLAY_FRAME_QUEUE_HPP
 
 extern "C"
 {
@@ -9,58 +9,61 @@ extern "C"
 #include "../element/play_frame.h"
 #include "data_queue.hpp"
 
-class OSFFPlayFrameQueue : public OSFFDataQueue
+namespace SnakeEye
 {
-private:
-    AVRational strm_tb = {1, AV_TIME_BASE};
-
-    double d_strm_tb = 0.0;
-
-    int cur_size = 0;
-
-private:
-    int reset_time(PlayFrame *frm);
-
-public:
-    const static std::string type;
-
-public:
-    OSFFPlayFrameQueue(AVRational strm_tb,
-                       int max_size)
-        : strm_tb(strm_tb),
-          OSFFDataQueue(max_size)
+    class SnakeEyePlayFrameQueue : public SnakeEyeDataQueue
     {
-        this->d_strm_tb = av_q2d(strm_tb);
-    }
+    private:
+        AVRational strm_tb = {1, AV_TIME_BASE};
 
-    virtual int preprocess(void *data)
-    {
-        if (data != nullptr)
+        double d_strm_tb = 0.0;
+
+        int cur_size = 0;
+
+    private:
+        int reset_time(PlayFrame *frm);
+
+    public:
+        const static std::string type;
+
+    public:
+        SnakeEyePlayFrameQueue(AVRational strm_tb,
+                               int max_size)
+            : strm_tb(strm_tb),
+              SnakeEyeDataQueue(max_size)
         {
-            this->reset_time((PlayFrame *)data);
+            this->d_strm_tb = av_q2d(strm_tb);
         }
 
-        return 0;
-    }
-
-    virtual int destroy_data(void *data)
-    {
-        if (data != nullptr)
+        virtual int preprocess(void *data)
         {
-            PlayFrame *frm = (PlayFrame *)data;
-            delete frm;
+            if (data != nullptr)
+            {
+                this->reset_time((PlayFrame *)data);
+            }
+
+            return 0;
         }
 
-        return 0;
-    }
+        virtual int destroy_data(void *data)
+        {
+            if (data != nullptr)
+            {
+                PlayFrame *frm = (PlayFrame *)data;
+                delete frm;
+            }
 
-    int peek_last_frame(PlayFrame *&frm);
+            return 0;
+        }
 
-    int peek_frame(PlayFrame *&frm);
+        int peek_last_frame(PlayFrame *&frm);
 
-    int peek_next_frame(PlayFrame *&frm);
-};
+        int peek_frame(PlayFrame *&frm);
 
-const std::string OSFFPlayFrameQueue::type = "PlayFrameQueue";
+        int peek_next_frame(PlayFrame *&frm);
+    };
 
-#endif // OSFF_PLAY_FRAME_QUEUE_HPP
+    const std::string SnakeEyePlayFrameQueue::type = "SnakeEyePlayFrameQueue";
+}
+
+#endif // SNAKE_EYE_PLAY_FRAME_QUEUE_HPP

@@ -1,6 +1,6 @@
 #include "format_packet_queue.hpp"
 
-int OSFFFormatPacketQueue::reset_time(AVPacket *pkt)
+int SnakeEye::SnakeEyeFormatPacketQueue::reset_time(AVPacket *pkt)
 {
     if (this->start_time != 0)
     {
@@ -34,9 +34,9 @@ int OSFFFormatPacketQueue::reset_time(AVPacket *pkt)
     return 0;
 }
 
-OSFFFormatPacketQueue::OSFFFormatPacketQueue(AVFormatContext *fmt_ctx,
-                                             int max_size)
-    : OSFFDataQueue(max_size)
+SnakeEye::SnakeEyeFormatPacketQueue::SnakeEyeFormatPacketQueue(AVFormatContext *fmt_ctx,
+                                                               int max_size)
+    : SnakeEyeDataQueue(max_size)
 {
     this->start_time = fmt_ctx->start_time;
 

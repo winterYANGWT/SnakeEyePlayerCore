@@ -1,14 +1,14 @@
-set(OSFF_SUB_MODULE queue)
-project(osff_${OSFF_SUB_MODULE})
+set(SNAKE_EYE_SUBMODULE queue)
+project(se_${SNAKE_EYE_SUBMODULE})
 
-set(${OSFF_SUB_MODULE}_HEADER_FILES
-    format_packet_queue.h
-    play_frame_queue.h
+set(${SNAKE_EYE_SUBMODULE}_HEADER_FILES
+    format_packet_queue.hpp
+    play_frame_queue.hpp
     stream_frame_queue.h
     stream_packet_queue.h
     )
 
-set(${OSFF_SUB_MODULE}_SOURCE_FILES
+set(${SNAKE_EYE_SUBMODULE}_SOURCE_FILES
     format_packet_queue.cpp
     play_frame_queue.cpp
     stream_frame_queue.cpp
@@ -16,24 +16,24 @@ set(${OSFF_SUB_MODULE}_SOURCE_FILES
     )
 
 add_library(${PROJECT_NAME} STATIC
-    ${${OSFF_SUB_MODULE}_HEADER_FILES}
-    ${${OSFF_SUB_MODULE}_SOURCE_FILES}
+    ${${SNAKE_EYE_SUBMODULE}_HEADER_FILES}
+    ${${SNAKE_EYE_SUBMODULE}_SOURCE_FILES}
     )
-add_library(osff::${OSFF_SUB_MODULE} ALIAS ${PROJECT_NAME})
+add_library(se::${SNAKE_EYE_SUBMODULE} ALIAS ${PROJECT_NAME})
 
 target_include_directories(${PROJECT_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/../element
     ${CMAKE_CURRENT_SOURCE_DIR}/../util
     )
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    osff::element
-    osff::util
+    se::element
+    se::util
     )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${FFMPEG_INCLUDE})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FFMPEG_LIBRARIES})
 
-install(FILES ${${OSFF_SUB_MODULE}_HEADER_FILES}
-    DESTINATION include/osff/${OSFF_SUB_MODULE}
+install(FILES ${${SNAKE_EYE_SUBMODULE}_HEADER_FILES}
+    DESTINATION include/se/${SNAKE_EYE_SUBMODULE}
     )
-add_dependencies(${PROJECT_NAME} osff_element osff_util)
+add_dependencies(${PROJECT_NAME} se_element se_util)

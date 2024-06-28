@@ -1,6 +1,6 @@
 #include "stream_frame_queue.hpp"
 
-int OSFFStreamFrameQueue::reset_time(AVFrame *frm)
+int SnakeEye::SnakeEyeStreamFrameQueue::reset_time(AVFrame *frm)
 {
     // do nothing if frame is nullptr
     if (frm == nullptr)

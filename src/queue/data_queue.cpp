@@ -1,6 +1,6 @@
 #include "data_queue.hpp"
 
-int OSFFDataQueue::clear()
+int SnakeEye::SnakeEyeDataQueue::clear()
 {
     std::unique_lock<std::mutex> lock(this->mtx);
 
@@ -14,7 +14,7 @@ int OSFFDataQueue::clear()
     return 0;
 }
 
-int OSFFDataQueue::push(void *data, int timeout)
+int SnakeEye::SnakeEyeDataQueue::push(void *data, int timeout)
 {
     this->preprocess(data);
     std::unique_lock<std::mutex> lock(this->mtx);
@@ -48,8 +48,8 @@ int OSFFDataQueue::push(void *data, int timeout)
     return 0;
 }
 
-int OSFFDataQueue::pop(void *&data,
-                       int timeout)
+int SnakeEye::SnakeEyeDataQueue::pop(void *&data,
+                                     int timeout)
 {
     std::unique_lock<std::mutex> lock(this->mtx);
 
