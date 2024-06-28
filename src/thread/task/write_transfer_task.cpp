@@ -1,6 +1,6 @@
 #include "write_transfer_task.hpp"
 
-int SnakeEye::SnakeEyeTransferTask::run()
+int SnakeEye::SnakeEyeWriteTransferTask::run()
 {
     auto it = this->estrm_id_list.begin();
 
