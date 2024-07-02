@@ -5,12 +5,12 @@ extern "C"
 {
 #include <libavutil/error.h>
 }
-
 #include <queue>
 #include <mutex>
 #include <condition_variable>
 #include <string>
-#include "../static/marco.hpp"
+
+#include "../static/macro.hpp"
 
 namespace SnakeEye
 {

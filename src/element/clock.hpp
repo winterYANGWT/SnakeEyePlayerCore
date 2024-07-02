@@ -6,7 +6,7 @@ extern "C"
 #include <libavutil/time.h>
 }
 
-#include "../static/marco.hpp"
+#include "../static/macro.hpp"
 
 namespace SnakeEye
 {
