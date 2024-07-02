@@ -25,6 +25,8 @@ namespace SnakeEye
 #define VIDEO_PLAY_STREAM_INDEX 0x10000 - 2
 #define SUBTITLE_PLAY_STREAM_INDEX 0x10000 - 3
 
+#ifndef NAN
 #define NAN __builtin_nanf("0x7fc00000")
+#endif
 
 #endif // SNAKE_EYE_MACRO_HPP
