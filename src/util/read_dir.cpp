@@ -1,7 +1,7 @@
-#include "read_dir.h"
+#include "read_dir.hpp"
 
-
-int read_dir(std::string &dir_path, std::vector<std::string> &files)
+int read_dir(std::string &dir_path,
+             std::vector<std::string> &files)
 {
     return 0;
     // clear files and open directory

@@ -1,6 +1,6 @@
-#include "util.h"
+#include "util.hpp"
 
-std::string err2str(int errnum)
+std::string SnakeEye::err2str(int errnum)
 {
     char errbuf[AV_ERROR_MAX_STRING_SIZE] = {0};
     return av_make_error_string(errbuf,

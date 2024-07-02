@@ -1,4 +1,4 @@
-#include "util.h"
+#include "util.hpp"
 
 static void process_default_string(nlohmann::json &param,
                                    const AVOption *option)
@@ -26,8 +26,8 @@ static void process_help_string(nlohmann::json &param,
     }
 }
 
-int parse_options(const AVClass **av_class,
-                  nlohmann::json &params)
+int SnakeEye::parse_options(const AVClass **av_class,
+                            nlohmann::json &params)
 {
     const AVOption *option = nullptr;
     const AVOption *last_option = nullptr;
@@ -129,8 +129,8 @@ int parse_options(const AVClass **av_class,
     return 0;
 }
 
-int get_filter_parameters(std::string fltr_name,
-                          nlohmann::json &params)
+int SnakeEye::get_filter_parameters(std::string fltr_name,
+                                    nlohmann::json &params)
 {
     const AVFilter *fltr = avfilter_get_by_name(fltr_name.c_str());
 
@@ -144,8 +144,8 @@ int get_filter_parameters(std::string fltr_name,
     return 0;
 }
 
-int get_decoder_parameters(std::string codec_name,
-                           nlohmann::json &params)
+int SnakeEye::get_decoder_parameters(std::string codec_name,
+                                     nlohmann::json &params)
 {
     const AVCodec *codec = avcodec_find_decoder_by_name(codec_name.c_str());
 
@@ -159,8 +159,8 @@ int get_decoder_parameters(std::string codec_name,
     return 0;
 }
 
-int get_encoder_parameters(std::string codec_name,
-                           nlohmann::json &params)
+int SnakeEye::get_encoder_parameters(std::string codec_name,
+                                     nlohmann::json &params)
 {
     const AVCodec *codec = avcodec_find_encoder_by_name(codec_name.c_str());
 
@@ -174,8 +174,8 @@ int get_encoder_parameters(std::string codec_name,
     return 0;
 }
 
-int get_input_parameters(std::string fmt_name,
-                         nlohmann::json &params)
+int SnakeEye::get_input_parameters(std::string fmt_name,
+                                   nlohmann::json &params)
 {
     const AVInputFormat *fmt = av_find_input_format(fmt_name.c_str());
 
@@ -189,8 +189,8 @@ int get_input_parameters(std::string fmt_name,
     return 0;
 }
 
-int get_output_parameters(std::string fmt_name,
-                          nlohmann::json &params)
+int SnakeEye::get_output_parameters(std::string fmt_name,
+                                    nlohmann::json &params)
 {
     const AVOutputFormat *fmt = av_guess_format(fmt_name.c_str(),
                                                 nullptr,

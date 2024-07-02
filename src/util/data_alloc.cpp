@@ -1,6 +1,6 @@
-#include "util.h"
+#include "util.hpp"
 
-int init_frame(AVFrame **frm)
+int SnakeEye::init_frame(AVFrame **frm)
 {
     if ((*frm = av_frame_alloc()) == nullptr)
     {
@@ -12,8 +12,8 @@ int init_frame(AVFrame **frm)
     return 0;
 }
 
-int init_frame_with_codec_ctx(AVFrame **frm,
-                              const AVCodecContext *codec_ctx)
+int SnakeEye::init_frame_with_codec_ctx(AVFrame **frm,
+                                        const AVCodecContext *codec_ctx)
 {
     if (codec_ctx->codec_type == AVMEDIA_TYPE_VIDEO)
     {
@@ -34,11 +34,11 @@ int init_frame_with_codec_ctx(AVFrame **frm,
     return AVERROR(EINVAL);
 }
 
-int init_audio_frame(AVFrame *&frm,
-                     int nb_samples,
-                     AVSampleFormat sample_fmt,
-                     AVChannelLayout channel_layout,
-                     int sample_rate)
+int SnakeEye::init_audio_frame(AVFrame *&frm,
+                               int nb_samples,
+                               AVSampleFormat sample_fmt,
+                               AVChannelLayout channel_layout,
+                               int sample_rate)
 {
     int error = 0;
 
@@ -66,10 +66,10 @@ int init_audio_frame(AVFrame *&frm,
     return error;
 }
 
-int init_video_frame(AVFrame *&frm,
-                     int width,
-                     int height,
-                     AVPixelFormat pix_fmt)
+int SnakeEye::init_video_frame(AVFrame *&frm,
+                               int width,
+                               int height,
+                               AVPixelFormat pix_fmt)
 {
     int error = 0;
 
@@ -95,7 +95,7 @@ int init_video_frame(AVFrame *&frm,
     return error;
 }
 
-int init_packet(AVPacket **pkt)
+int SnakeEye::init_packet(AVPacket **pkt)
 {
     if ((*pkt = av_packet_alloc()) == nullptr)
     {

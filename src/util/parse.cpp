@@ -1,11 +1,11 @@
-#include "util.h"
+#include "util.hpp"
 
-int parse_encoder_params(nlohmann::json &params,
-                         AVDictionary **priv_options,
-                         AVSampleFormat &smp_fmt,
-                         int &smp_rate,
-                         AVChannelLayout &ch_layout,
-                         AVPixelFormat &pix_fmt)
+int SnakeEye::parse_encoder_params(nlohmann::json &params,
+                                   AVDictionary **priv_options,
+                                   AVSampleFormat &smp_fmt,
+                                   int &smp_rate,
+                                   AVChannelLayout &ch_layout,
+                                   AVPixelFormat &pix_fmt)
 {
     if (!params["encoder_supported_sample_formats"].empty())
     {

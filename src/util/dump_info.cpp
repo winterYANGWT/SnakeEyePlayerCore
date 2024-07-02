@@ -1,8 +1,8 @@
-#include "util.h"
+#include "util.hpp"
 
-int dump_format_info(int fmt_ctx_idx,
-                     AVFormatContext *fmt_ctx,
-                     nlohmann::json &info)
+int SnakeEye::dump_format_info(int fmt_ctx_idx,
+                               AVFormatContext *fmt_ctx,
+                               nlohmann::json &info)
 {
     info.clear();
     char str_buf[1024] = {0};
@@ -37,9 +37,9 @@ int dump_format_info(int fmt_ctx_idx,
     return 0;
 }
 
-int dump_stream_info(int strm_idx,
-                     AVStream *strm,
-                     nlohmann::json &info)
+int SnakeEye::dump_stream_info(int strm_idx,
+                               AVStream *strm,
+                               nlohmann::json &info)
 {
     info.clear();
     char str_buf[1024] = {0};

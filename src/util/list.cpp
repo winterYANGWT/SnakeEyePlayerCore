@@ -1,6 +1,6 @@
-#include "util.h"
+#include "util.hpp"
 
-int list_demuxers(nlohmann::json &demuxers)
+int SnakeEye::list_demuxers(nlohmann::json &demuxers)
 {
     void *opaque = nullptr;
     const AVInputFormat *fmt = nullptr;
@@ -14,7 +14,7 @@ int list_demuxers(nlohmann::json &demuxers)
     return 0;
 }
 
-int list_muxers(nlohmann::json &muxers)
+int SnakeEye::list_muxers(nlohmann::json &muxers)
 {
     void *opaque = nullptr;
     const AVOutputFormat *fmt = nullptr;
@@ -28,7 +28,7 @@ int list_muxers(nlohmann::json &muxers)
     return 0;
 }
 
-int list_filters(nlohmann::json &filters)
+int SnakeEye::list_filters(nlohmann::json &filters)
 {
     void *opaque = nullptr;
     const AVFilter *filter = nullptr;

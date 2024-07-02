@@ -1,8 +1,8 @@
-#include "utils.h"
+#include "utils.hpp"
 
-std::string generate_device_name(const std::string format_name,
-                                 const std::string &audio_device_name,
-                                 const std::string &video_device_name)
+std::string SnakeEye::generate_device_name(const std::string format_name,
+                                           const std::string &audio_device_name,
+                                           const std::string &video_device_name)
 {
     std::string device_name = "";
 
