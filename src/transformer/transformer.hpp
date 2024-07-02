@@ -15,8 +15,8 @@ extern "C"
 #include <string>
 #include <queue>
 
-#include "../util/util.h"
-#include "../static/marco.hpp"
+#include "../util/util.hpp"
+#include "../static/macro.hpp"
 
 namespace SnakeEye
 {
