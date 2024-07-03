@@ -9,7 +9,7 @@ extern "C"
 #include <string>
 #include <vector>
 
-#include "../util/util.h"
+#include "../util/util.hpp"
 
 namespace SnakeEye
 {

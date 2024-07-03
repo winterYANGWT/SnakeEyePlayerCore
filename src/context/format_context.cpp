@@ -29,7 +29,7 @@ int SnakeEye::SnakeEyeFormatContext::add_stream(AVCodecContext *codec_ctx,
         av_log(this->fmt_ctx, AV_LOG_ERROR,
                "Could not copy codec parameters to stream for format context #%d (error: '%s')\n",
                this->fmt_id,
-               err2str(error));
+               err2str(error).c_str());
         return error;
     }
 
@@ -43,7 +43,7 @@ int SnakeEye::SnakeEyeFormatContext::add_stream(AVCodecContext *codec_ctx,
         av_log(this->fmt_ctx, AV_LOG_ERROR,
                "Could not initialize output format context #%d (error: '%s')\n",
                this->fmt_id,
-               err2str(error));
+               err2str(error).c_str());
         return error;
     }
 
