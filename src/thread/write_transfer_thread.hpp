@@ -2,7 +2,6 @@
 #define SNAKE_EYE_WRITE_TRANSFER_THREAD_HPP
 
 #include "base_thread.hpp"
-#include "../task/write_task.hpp"
 #include "../task/write_transfer_task.hpp"
 
 namespace SnakeEye

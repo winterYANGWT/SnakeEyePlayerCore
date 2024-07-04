@@ -4,8 +4,8 @@
 #include <functional>
 
 #include "base_task.hpp"
-#include "../../context/format_context.hpp"
-#include "../../util/util.h"
+#include "../context/format_context.hpp"
+#include "../util/util.hpp"
 
 namespace SnakeEye
 {

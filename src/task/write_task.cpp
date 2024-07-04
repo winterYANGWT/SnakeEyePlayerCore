@@ -14,13 +14,14 @@ int SnakeEye::SnakeEyeWriteTask::run()
 
     AVPacket *pkt = nullptr;
 
-    if ((this->status = this->pop_pkt_cb(this->se_fmt_ctx->rw_pkt_queue_id,
+    if ((this->status = this->pop_pkt_cb(this->se_fmt_ctx->fmt_pkt_queue_id,
                                          (void *&)pkt,
                                          THREAD_NO_TIMEOUT)) < 0)
     {
         av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
                "Could not pop packet (error: '%s') for format_packet_queue #%d\n",
-               err2str(this->status).c_str());
+               err2str(this->status).c_str(),
+               this->se_fmt_ctx->fmt_pkt_queue_id);
         this->exit_flag = true;
         return this->status;
     }
@@ -32,7 +33,8 @@ int SnakeEye::SnakeEyeWriteTask::run()
     {
         av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
                "Could not write frame (error: '%s') for format #%d\n",
-               err2str(this->status).c_str());
+               err2str(this->status).c_str(),
+               this->se_fmt_ctx->fmt_id);
         av_packet_free(&pkt);
         this->exit_flag = true;
         return this->status;
@@ -72,7 +74,8 @@ int SnakeEye::SnakeEyeWriteTask::write_header()
         {
             av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
                    "Could not write header (error: '%s') for format #%d\n",
-                   err2str(this->status).c_str());
+                   err2str(this->status).c_str(),
+                   this->se_fmt_ctx->fmt_id);
             this->exit_flag = true;
         }
         else
@@ -101,7 +104,8 @@ int SnakeEye::SnakeEyeWriteTask::write_tailer()
         {
             av_log(this->se_fmt_ctx->fmt_ctx, AV_LOG_ERROR,
                    "Could not write trailer (error: '%s') for format #%d\n",
-                   err2str(this->status).c_str());
+                   err2str(this->status).c_str(),
+                   this->se_fmt_ctx->fmt_id);
             this->exit_flag = true;
         }
         else

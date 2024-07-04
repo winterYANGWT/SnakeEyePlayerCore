@@ -7,7 +7,15 @@
 
 namespace SnakeEye
 {
-    int task_loop(SnakeEyeBaseTask *task);
+    inline int task_loop(SnakeEyeBaseTask *task)
+    {
+        while (!task->exit_flag)
+        {
+            task->run();
+        }
+
+        return task->status;
+    }
 
     class SnakeEyeBaseThread
     {

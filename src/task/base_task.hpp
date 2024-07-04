@@ -1,8 +1,8 @@
 #ifndef SNAKE_EYE_BASE_TASK_HPP
 #define SNAKE_EYE_BASE_TASK_HPP
 
-#include "../../static/marco.hpp"
-#include "../../util/util.h"
+#include "../static/macro.hpp"
+#include "../util/util.hpp"
 
 namespace SnakeEye
 {

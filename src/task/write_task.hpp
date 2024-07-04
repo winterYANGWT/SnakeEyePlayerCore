@@ -2,7 +2,7 @@
 #define SNAKE_EYE_WRITE_TASK_HPP
 
 #include "base_task.hpp"
-#include "../../context/format_context.hpp"
+#include "../context/format_context.hpp"
 
 namespace SnakeEye
 {

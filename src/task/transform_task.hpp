@@ -2,7 +2,7 @@
 #define SNAKE_EYE_TRANSFORMER_TASK_HPP
 
 #include "base_task.hpp"
-#include "../../context/transformer_context.hpp"
+#include "../context/transformer_context.hpp"
 
 namespace SnakeEye
 {

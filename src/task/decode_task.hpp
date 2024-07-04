@@ -2,7 +2,7 @@
 #define SNAKE_EYE_DECODE_TASK_HPP
 
 #include "base_task.hpp"
-#include "../../context/stream_context.hpp"
+#include "../context/stream_context.hpp"
 
 namespace SnakeEye
 {

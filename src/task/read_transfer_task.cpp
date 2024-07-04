@@ -87,4 +87,6 @@ int SnakeEye::SnakeEyeReadTransferTask::run()
 
         av_packet_free(&pkt);
     }
+
+    return this->status;
 }

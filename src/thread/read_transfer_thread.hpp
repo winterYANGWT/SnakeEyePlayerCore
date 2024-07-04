@@ -4,7 +4,6 @@
 #include <functional>
 
 #include "base_thread.hpp"
-#include "../../context/format_context.hpp"
 #include "../task/read_transfer_task.hpp"
 
 namespace SnakeEye
