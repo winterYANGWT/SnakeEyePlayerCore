@@ -1,9 +1,9 @@
-#include "codec_parser.h"
+#include "codec_parser.hpp"
 
 #include <iostream>
 
-int OSFFCodecParser::get_encoder_profiles(const AVCodec *codec,
-                                          nlohmann::json &profiles)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_profiles(const AVCodec *codec,
+                                                        nlohmann::json &profiles)
 {
     profiles.clear();
     profiles["name"] = "encoder_profiles";
@@ -25,8 +25,8 @@ int OSFFCodecParser::get_encoder_profiles(const AVCodec *codec,
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_sample_formats(const AVCodec *codec,
-                                                nlohmann::json &smp_fmts)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_sample_formats(const AVCodec *codec,
+                                                              nlohmann::json &smp_fmts)
 {
     smp_fmts.clear();
     smp_fmts["name"] = "encoder_sample_formats";
@@ -48,7 +48,7 @@ int OSFFCodecParser::get_encoder_sample_formats(const AVCodec *codec,
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_sample_rates(const AVCodec *codec, nlohmann::json &smp_rates)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_sample_rates(const AVCodec *codec, nlohmann::json &smp_rates)
 {
     smp_rates.clear();
     smp_rates["name"] = "encoder_sample_rates";
@@ -70,8 +70,8 @@ int OSFFCodecParser::get_encoder_sample_rates(const AVCodec *codec, nlohmann::js
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_channel_layouts(const AVCodec *codec,
-                                                 nlohmann::json &ch_layouts)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_channel_layouts(const AVCodec *codec,
+                                                               nlohmann::json &ch_layouts)
 {
     ch_layouts.clear();
     ch_layouts["name"] = "encoder_channel_layouts";
@@ -95,8 +95,8 @@ int OSFFCodecParser::get_encoder_channel_layouts(const AVCodec *codec,
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_pixel_formats(const AVCodec *codec,
-                                               nlohmann::json &pix_fmts)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_pixel_formats(const AVCodec *codec,
+                                                             nlohmann::json &pix_fmts)
 {
     pix_fmts.clear();
     pix_fmts["name"] = "encoder_pixel_formats";
@@ -118,7 +118,7 @@ int OSFFCodecParser::get_encoder_pixel_formats(const AVCodec *codec,
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_bit_rate(nlohmann::json &bit_rate)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_bit_rate(nlohmann::json &bit_rate)
 {
     bit_rate.clear();
     bit_rate["name"] = "bit_rate";
@@ -130,8 +130,8 @@ int OSFFCodecParser::get_encoder_bit_rate(nlohmann::json &bit_rate)
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_parameters(const AVCodec *codec,
-                                            nlohmann::json &params)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_parameters(const AVCodec *codec,
+                                                          nlohmann::json &params)
 {
     params.clear();
     params["name"] = "encoder_params";
@@ -143,14 +143,14 @@ int OSFFCodecParser::get_encoder_parameters(const AVCodec *codec,
     return 0;
 }
 
-int OSFFCodecParser::parse_encoder_settings(nlohmann::json &settings,
-                                            int &profile,
-                                            int &bit_rate,
-                                            AVSampleFormat &smp_fmt,
-                                            int &smp_rate,
-                                            AVChannelLayout &ch_layout,
-                                            AVPixelFormat &pix_fmt,
-                                            AVDictionary **priv_options)
+int SnakeEye::SnakeEyeCodecParser::parse_encoder_settings(nlohmann::json &settings,
+                                                          int &profile,
+                                                          int &bit_rate,
+                                                          AVSampleFormat &smp_fmt,
+                                                          int &smp_rate,
+                                                          AVChannelLayout &ch_layout,
+                                                          AVPixelFormat &pix_fmt,
+                                                          AVDictionary **priv_options)
 {
     for (auto it = settings.begin();
          it != settings.end();
@@ -232,7 +232,7 @@ int OSFFCodecParser::parse_encoder_settings(nlohmann::json &settings,
     return 0;
 }
 
-int OSFFCodecParser::list_decoders(nlohmann::json &decoders)
+int SnakeEye::SnakeEyeCodecParser::list_decoders(nlohmann::json &decoders)
 {
     void *opaque = nullptr;
     const AVCodec *codec = nullptr;
@@ -251,8 +251,8 @@ int OSFFCodecParser::list_decoders(nlohmann::json &decoders)
     return 0;
 }
 
-int OSFFCodecParser::list_encoders(std::string codec_type,
-                                   nlohmann::json &encoders)
+int SnakeEye::SnakeEyeCodecParser::list_encoders(std::string codec_type,
+                                                 nlohmann::json &encoders)
 {
     encoders.clear();
     encoders = nlohmann::json::array();
@@ -280,8 +280,8 @@ int OSFFCodecParser::list_encoders(std::string codec_type,
     return 0;
 }
 
-int OSFFCodecParser::get_encoder_settings(std::string codec_name,
-                                          nlohmann::json &settings)
+int SnakeEye::SnakeEyeCodecParser::get_encoder_settings(std::string codec_name,
+                                                        nlohmann::json &settings)
 {
     const AVCodec *codec = avcodec_find_encoder_by_name(codec_name.c_str());
 
@@ -335,9 +335,9 @@ int OSFFCodecParser::get_encoder_settings(std::string codec_name,
     return 0;
 }
 
-int OSFFCodecParser::build_encoder_context(AVStream *dstrm,
-                                           nlohmann::json &params_info,
-                                           AVCodecContext *&codec_ctx)
+int SnakeEye::SnakeEyeCodecParser::build_encoder_context(AVStream *dstrm,
+                                                         nlohmann::json &params_info,
+                                                         AVCodecContext *&codec_ctx)
 {
     // get codec
     std::cout << params_info << std::endl;
