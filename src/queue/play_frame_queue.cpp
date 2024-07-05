@@ -1,6 +1,6 @@
 #include "play_frame_queue.hpp"
 
-int SnakeEye::SnakeEyePlayFrameQueue::reset_time(PlayFrame *frm)
+int SnakeEye::SnakeEyePlayFrameQueue::reset_time(SnakeEyePlayFrame *frm)
 {
     frm->pts = this->d_strm_tb * (double)frm->frm->pts;
     frm->duration = this->d_strm_tb * frm->frm->duration;

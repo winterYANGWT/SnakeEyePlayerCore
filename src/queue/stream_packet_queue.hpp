@@ -6,7 +6,7 @@ extern "C"
 #include <libavformat/avformat.h>
 }
 
-#include "../util/util.h"
+#include "../util/util.hpp"
 #include "data_queue.hpp"
 
 namespace SnakeEye

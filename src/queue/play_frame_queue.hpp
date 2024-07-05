@@ -6,7 +6,7 @@ extern "C"
 #include <libavutil/frame.h>
 }
 
-#include "../element/play_frame.h"
+#include "../element/play_frame.hpp"
 #include "data_queue.hpp"
 
 namespace SnakeEye
@@ -21,7 +21,7 @@ namespace SnakeEye
         int cur_size = 0;
 
     private:
-        int reset_time(PlayFrame *frm);
+        int reset_time(SnakeEyePlayFrame *frm);
 
     public:
         const static std::string type;
@@ -39,7 +39,7 @@ namespace SnakeEye
         {
             if (data != nullptr)
             {
-                this->reset_time((PlayFrame *)data);
+                this->reset_time((SnakeEyePlayFrame *)data);
             }
 
             return 0;
@@ -49,18 +49,18 @@ namespace SnakeEye
         {
             if (data != nullptr)
             {
-                PlayFrame *frm = (PlayFrame *)data;
+                SnakeEyePlayFrame *frm = (SnakeEyePlayFrame *)data;
                 delete frm;
             }
 
             return 0;
         }
 
-        int peek_last_frame(PlayFrame *&frm);
+        int peek_last_frame(SnakeEyePlayFrame *&frm);
 
-        int peek_frame(PlayFrame *&frm);
+        int peek_frame(SnakeEyePlayFrame *&frm);
 
-        int peek_next_frame(PlayFrame *&frm);
+        int peek_next_frame(SnakeEyePlayFrame *&frm);
     };
 
     const std::string SnakeEyePlayFrameQueue::type = "SnakeEyePlayFrameQueue";
