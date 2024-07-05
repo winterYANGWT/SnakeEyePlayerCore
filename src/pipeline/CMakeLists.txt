@@ -1,0 +1,20 @@
+set(SNAKE_EYE_PIPELINE_SUBMODULE pipeline)
+project(se_${SNAKE_EYE_PIPELINE_SUBMODULE})
+
+set(${SNAKE_EYE_PIPELINE_SUBMODULE}_HEADER_FILES
+    abstract_builder.hpp
+    pipeline.hpp
+    )
+
+add_library(${PROJECT_NAME} INTERFACE
+    ${${SNAKE_EYE_PIPELINE_SUBMODULE}_HEADER_FILES}
+    )
+
+add_library(se::${SNAKE_EYE_PIPELINE_SUBMODULE} ALIAS ${PROJECT_NAME})
+
+# link third-party libraries
+target_include_directories(${PROJECT_NAME} INTERFACE ${FFMPEG_INCLUDE})
+
+install(FILES ${${SNAKE_EYE_PIPELINE_SUBMODULE}_HEADER_FILES}
+    DESTINATION include/se/${SNAKE_EYE_PIPELINE_SUBMODULE}
+    )

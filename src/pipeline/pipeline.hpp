@@ -1,5 +1,5 @@
-#ifndef OSFF_PIPELINE_HPP
-#define OSFF_PIPELINE_HPP
+#ifndef SNAKE_EYE_PIPELINE_HPP
+#define SNAKE_EYE_PIPELINE_HPP
 
 extern "C"
 {
@@ -9,30 +9,33 @@ extern "C"
 #include <vector>
 #include <string>
 
-class OSFFPipeline
+namespace SnakeEye
 {
-public:
-    std::vector<std::string> status_link_list;
+    class SnakeEyePipeline
+    {
+    public:
+        std::vector<std::string> status_link_list;
 
-    int ifmt_idx = -1;
+        int ifmt_idx = -1;
 
-    int ofmt_idx = -1;
+        int ofmt_idx = -1;
 
-    int istrm_idx = -1;
+        int istrm_idx = -1;
 
-    int ostrm_idx = -1;
+        int ostrm_idx = -1;
 
-    int dstrm_idx = -1;
+        int dstrm_idx = -1;
 
-    int estrm_idx = -1;
+        int estrm_idx = -1;
 
-    AVStream *dstrm = nullptr;
+        AVStream *dstrm = nullptr;
 
-    AVStream *estrm = nullptr;
+        AVStream *estrm = nullptr;
 
-    AVCodecContext *dec_ctx = nullptr;
+        AVCodecContext *dec_ctx = nullptr;
 
-    AVCodecContext *enc_ctx = nullptr;
-};
+        AVCodecContext *enc_ctx = nullptr;
+    };
+}
 
-#endif // OSFF_PIPELINE_HPP
+#endif // SNAKE_EYE_PIPELINE_HPP
