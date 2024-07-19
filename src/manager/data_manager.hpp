@@ -1,9 +1,9 @@
-#ifndef DATA_MANAGER_H
-#define DATA_MANAGER_H
+#ifndef SNAKE_EYE_DATA_MANAGER_HPP
+#define SNAKE_EYE_DATA_MANAGER_HPP
 
 /**
- * @file data_manager.h
- * @brief This file contains the declaration of the DataManager class.
+ * @file data_manager.hpp
+ * @brief This file contains the declaration of the SnakeEyeDataManager class.
  */
 
 #include <unordered_map>
@@ -11,65 +11,68 @@
 #include "../queue/data_queue.hpp"
 #include "../queue/play_frame_queue.hpp"
 
-/**
- * @class DataManager
- * @brief Class responsible for managing data.
- */
-class DataManager
+namespace SnakeEye
 {
-private:
-    std::unordered_map<int, OSFFDataQueue *> queues;
+    /**
+     * @class SnakeEyeDataManager
+     * @brief Class responsible for managing data.
+     */
+    class SnakeEyeDataManager
+    {
+    private:
+        std::unordered_map<int, SnakeEyeDataQueue *> queues;
 
-    std::unordered_map<int, int> queues_ref_count;
+        std::unordered_map<int, int> queues_ref_count;
 
-    OSFFPlayFrameQueue *audio_play_frm_queue = nullptr;
+        // SnakeEyePlayFrameQueue *audio_play_frm_queue = nullptr;
 
-    OSFFPlayFrameQueue *video_play_frm_queue = nullptr;
+        // SnakeEyePlayFrameQueue *video_play_frm_queue = nullptr;
 
-public:
-    ~DataManager();
+    public:
+        ~SnakeEyeDataManager();
 
-    int add_data_queue(int queue_id,
-                       OSFFDataQueue *queue);
+        int add_data_queue(int queue_id,
+                           SnakeEyeDataQueue *queue);
 
-    int delete_data_queue(int queue_id);
+        int delete_data_queue(int queue_id);
 
-    int get_data_queue(int queue_id,
-                       OSFFDataQueue *&queue);
+        int get_data_queue(int queue_id,
+                           SnakeEyeDataQueue *&queue);
 
-    int push_data(int queue_id,
-                  void *data,
-                  int timeout);
+        int push_data(int queue_id,
+                      void *data,
+                      int timeout);
 
-    int pop_data(int queue_id,
-                 void *&data,
-                 int timeout);
+        int pop_data(int queue_id,
+                     void *&data,
+                     int timeout);
 
-    int add_play_stream_queue(int strm_idx,
-                              AVRational strm_tb);
+        // int add_play_stream_queue(int strm_idx,
+        //                           AVRational strm_tb);
 
-    int delete_play_stream_queue(int strm_idx);
+        // int delete_play_stream_queue(int strm_idx);
 
-    int push_play_stream_frame(int strm_idx,
-                               PlayFrame *frm,
-                               int timeout);
+        // int push_play_stream_frame(int strm_idx,
+        //                            SnakeEyePlayFrame *frm,
+        //                            int timeout);
 
-    int pop_play_stream_frame(int strm_idx);
+        // int pop_play_stream_frame(int strm_idx);
 
-    int peek_play_stream_frame(int strm_idx,
-                               PlayFrame *&frm);
+        // int peek_play_stream_frame(int strm_idx,
+        //                            SnakeEyePlayFrame *&frm);
 
-    int peek_last_play_stream_frame(int strm_idx,
-                                    PlayFrame *&frm);
+        // int peek_last_play_stream_frame(int strm_idx,
+        //                                 SnakeEyePlayFrame *&frm);
 
-    int peek_next_play_stream_frame(int strm_idx,
-                                    PlayFrame *&frm);
+        // int peek_next_play_stream_frame(int strm_idx,
+        //                                 SnakeEyePlayFrame *&frm);
 
-    int play_stream_queue_size(int strm_idx);
+        // int play_stream_queue_size(int strm_idx);
 
-    int start();
+        int start();
 
-    int end();
-};
+        int end();
+    };
+}
 
-#endif // DATA_MANAGER_H
+#endif // SNAKE_EYE_DATA_MANAGER_HPP
